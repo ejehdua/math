@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>משחק משוואות באיזון</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .btn {
+      font-size: 24px;
+      margin: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="game-root"></div>
+
+<script>
+let my = {}
+
+function init() {
+  let version = '0.82'
+  let w = 600
+  let h = 480
+
+  my.imgHome = 'https://www.mathsisfun.com/algebra/images/'
+
+  let s = ''
+  s += '<div style="position:relative; width:' + w + 'px;  border: none; border-radius: 9px; margin:auto; display:block; background-color: hsl(240,100%,92%); padding: 10px; ">'
+  let tp = 10
+  s += '<div id="arm" style="background-image: url(' + my.imgHome + 'balance-arm.gif);	position: absolute;	left: 100px; top:' + (tp + 100) + 'px; height: 87px;	transition: all 0.3s ease-in-out; width: 301px;	z-index: 150;	"></div>'
+  s += '<div id="col" style="background-image: url(' + my.imgHome + 'balance-column.gif); position: absolute; left: 203px;	top:' + (tp + 85) + 'px; height: 204px; 	width: 96px;	z-index: 100;	"></div>'
+  s += '<div id="bowlLt" style="background-image: url(' + my.imgHome + 'balance-bowl.gif);	position: absolute;	left: 48px;	top:' + (tp + 150) + 'px; height: 122px;	transition: all 0.3s ease-in-out; width: 132px;	z-index: 10;	"></div>'
+  s += '<div id="bowlRt" style="background-image: url(' + my.imgHome + 'balance-bowl.gif);	position: absolute;	left: 318px; top:' + (tp + 150) + 'px;	height: 122px;	transition: all 0.3s ease-in-out; width: 132px;	z-index: 100;	"></div>'
+
+  s += '<div id="btns1" style="position:absolute; left:3px; top:3px; background-color: #ffd; border-radius: 10px; padding: 5px;">'
+  s += '<button id="px" onclick="chg(0,1)" class="btn" >+X (הוסף נעלם)</button>'
+  s += '<button id="p1" onclick="chg(1,1)" class="btn" >+1 (הוסף מספר)</button><br>'
+  s += '<button id="mx" onclick="chg(0,-1)" class="btn" >−X (הסר נעלם)</button>'
+  s += '<button id="m1" onclick="chg(1,-1)" class="btn" >−1 (הסר מספר)</button>'
+  s += '</div>'
+
+  s += '<button id="neweq" onclick="newEq()" style="position:absolute; right:3px; top:3px;" class="btn" >משוואה חדשה</button>'
+  s += '<div id="success" style="position: absolute; left:0; top:80px; width:100%; padding: 5px; font: bold 40px Arial; text-align: center; color: blue; text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; z-index:200;">כל הכבוד!</div>'
+  s += '<div style="height: 252px;"></div>'
+
+  s += '<div id="eq" class="control" style=" width:' + (w - 60) + 'px; padding: 5px; text-align: center; margin:auto; font: bold 28px Arial; ">'
+  s += '<div id="eqLt" style="display: inline-block; width:40%; padding: 5px;">x</div>'
+  s += '<div id="eqEq" style="display: inline-block; width:10%; padding: 5px;">שווה</div>'
+  s += '<div id="eqRt" style="display: inline-block; width:40%; padding: 5px;">2</div>'
+  s += '</div>'
+
+  s += '<img id="tick" src="https://www.mathsisfun.com/images/style/tick.png" style="margin-top: -10px;" />'
+  s += '<div style="font: 11px Arial; color: #888888; text-align:center;">&copy; 2024 Rod Pierce</div>'
+  s += '</div>'
+
+  document.getElementById("game-root").innerHTML = s
+
+  my.bowlWts = []
+  newEq()
+  placeWts()
+}
+
+function newEq() {
+  let xIs = getRandomInt(2, 6)
+  my.bowlWts[0] = [1, 0]
+  my.bowlWts[1] = [0, xIs]
+  for (let i = 0; i < 2; i++) {
+    let typ = i
+    let amnt = getRandomInt(1, 4)
+    if (getRandomInt(0, 1) == 1) amnt = -amnt
+    my.bowlWts[0][typ] += amnt
+    my.bowlWts[1][typ] += amnt
+  }
+  placeWts()
+  chg(0, 0)
+}
+
+function placeWts() {
+  let bowls = ['bowlLt', 'bowlRt']
+  for (let bowl = 0; bowl < 2; bowl++) {
+    let s = ''
+    for (let i = 0; i < -my.bowlWts[bowl][1]; i++) {
+      s += '<img src="' + my.imgHome + 'balance-up1.gif" style="position: absolute; left:' + (64 + i * 6) + 'px;	top:46px;" />'
+    }
+    for (let i = 0; i < my.bowlWts[bowl][1]; i++) {
+      s += '<img src="' + my.imgHome + 'balance-wt1.gif" style="position: absolute; left: 68px;	top:' + (82 - i * 12) + 'px;" />'
+    }
+    for (let i = 0; i < -my.bowlWts[bowl][0]; i++) {
+      s += '<img src="' + my.imgHome + 'balance-upx.gif" style="position: absolute; left:' + (10 + i * 6) + 'px;	top:46px;" />'
+    }
+    for (let i = 0; i < my.bowlWts[bowl][0]; i++) {
+      s += '<img src="' + my.imgHome + 'balance-wtx.gif" style="position: absolute; left: 24px;	top:' + (77 - i * 18) + 'px;" />'
+    }
+    document.getElementById(bowls[bowl]).innerHTML = s
+  }
+}
+
+function chg(typ, n) {
+  my.bowlWts[0][typ] += n
+  my.bowlWts[1][typ] += n
+  placeWts()
+  tiltScale(2)
+  setTimeout(() => tiltScale(-2), 300)
+  setTimeout(() => tiltScale(0), 600)
+  document.getElementById('eqLt').innerHTML = eqFmt(my.bowlWts[0])
+  document.getElementById('eqRt').innerHTML = eqFmt(my.bowlWts[1])
+  let okQ = (my.bowlWts[0][0] == 1 && my.bowlWts[0][1] == 0)
+  document.getElementById('tick').style.opacity = okQ ? 1 : 0
+  document.getElementById('success').style.opacity = okQ ? 1 : 0
+}
+
+function tiltScale(deg) {
+  document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)'
+  document.getElementById('bowlLt').style.top = 105 + 4 * -deg + 'px'
+  document.getElementById('bowlRt').style.top = 105 + 4 * deg + 'px'
+}
+
+function eqFmt(a) {
+  let s = ''
+  for (let k in a) {
+    let v = a[k]
+    if (v != 0) {
+      if (v < 0) {
+        s += (s.length == 0 ? '−' : ' − ')
+        v = -v
+      } else if (s.length > 0) {
+        s += ' + '
+      }
+      if (k == 0) {
+        if (v != 1) s += v
+        s += 'x'
+      } else {
+        s += v
+      }
+    }
+  }
+  return s.length ? s : '0'
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+window.onload = init;
+</script>
+</body>
+</html>
