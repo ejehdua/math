@@ -77,7 +77,7 @@
     }
 
     #tip {
-      top: 65px;
+      top: 60px;
       left: 345px;
       width: 30px;
       height: 40px;
@@ -99,13 +99,13 @@
       top: 125px;
       left: 310px;
       width: 100px;
-      height: 240px;
+      height: 270px;
       background-image: url("עמוד.png");
       z-index: 100;
     }
 
     #base {
-      bottom: 30px;
+      bottom: 40px;
       left: 295px;
       width: 140px;
       height: 40px;
@@ -114,15 +114,15 @@
     }
 
     .holder {
-      width: 85px;
-      height: 390px;
+      width: 90px;
+      height: 440px;
       background-image: url("מחזיק כף.png");
       z-index: 115;
       transition: top 0.3s ease-in-out;
     }
 
-    #holderLt { left: 210px; top: 80px; }
-    #holderRt { left: 490px; top: 80px; }
+    #holderLt { left: 210px; top: 50px; }
+    #holderRt { left: 490px; top: 50px; }
 
     .bowl {
       width: 132px;
@@ -132,8 +132,8 @@
       transition: top 0.3s ease-in-out;
     }
 
-    #bowlLt { left: 153px; top: 295px; }
-    #bowlRt { left: 433px; top: 295px; }
+    #bowlLt { left: 153px; top: 320px; }
+    #bowlRt { left: 433px; top: 320px; }
   </style>
 </head>
 <body>
@@ -167,7 +167,7 @@
 </div>
 
 <script>
-let my = { imgHome: '', };
+let my = { imgHome: '' };
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -223,7 +223,7 @@ function placeWts() {
     let html = '';
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
-      html += `<img src="${img}" style="position:absolute; width:36%; top:${0 - i * 8}%; left:35%;">`;
+      html += `<img src="${img}" style="position:absolute; width:34%; top:${8 - i * 8}%; left:35%;">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
@@ -235,10 +235,10 @@ function placeWts() {
 
 function tiltScale(deg) {
   document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)';
-  document.getElementById('bowlLt').style.top = 295 + 4 * -deg + 'px';
-  document.getElementById('bowlRt').style.top = 295 + 4 * deg + 'px';
-  document.getElementById('holderLt').style.top = 80 + 2 * -deg + 'px';
-  document.getElementById('holderRt').style.top = 80 + 2 * deg + 'px';
+  document.getElementById('bowlLt').style.top = 320 + 4 * -deg + 'px';
+  document.getElementById('bowlRt').style.top = 320 + 4 * deg + 'px';
+  document.getElementById('holderLt').style.top = 50 + 2 * -deg + 'px';
+  document.getElementById('holderRt').style.top = 50 + 2 * deg + 'px';
 }
 
 function chg(type, val) {
