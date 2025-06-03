@@ -35,89 +35,67 @@
     #balance-container {
       position: relative;
       width: 600px;
-      height: 320px;
+      height: 360px;
       margin: 0 auto 20px;
       background-color: hsl(240,100%,92%);
       border-radius: 12px;
       overflow: hidden;
     }
 
-    /* חלקי המאזניים */
+    /* מאוזן: זרוע, עמוד, קערות */
     #col {
       position: absolute;
-      top: 80px;
+      top: 100px;
       left: 252px;
       width: 96px;
       height: 204px;
-      background-image: url("עמוד.png");
-      background-size: contain;
-      background-repeat: no-repeat;
+      background: url("עמוד.png") no-repeat center/contain;
       z-index: 100;
     }
 
     #arm {
       position: absolute;
-      top: 110px;
+      top: 90px;
       left: 90px;
       width: 420px;
       height: 80px;
-      background-image: url("מאזניים.png");
-      background-size: contain;
-      background-repeat: no-repeat;
+      background: url("מאזניים.png") no-repeat center/contain;
       z-index: 150;
-    }
-
-    #bowlLt, #bowlRt {
-      position: absolute;
-      width: 132px;
-      height: 122px;
-      background-image: url("כף.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      z-index: 120;
-    }
-
-    #bowlLt {
-      left: 60px;
-      top: 160px;
-    }
-
-    #bowlRt {
-      left: 390px;
-      top: 160px;
     }
 
     .hanger {
       position: absolute;
       width: 40px;
       height: 80px;
-      background-image: url("מחזיק כף.png");
-      background-size: contain;
-      background-repeat: no-repeat;
+      background: url("מחזיק כף.png") no-repeat center/contain;
+      z-index: 120;
+    }
+
+    #hangerLt { top: 140px; left: 120px; }
+    #hangerRt { top: 140px; left: 430px; }
+
+    .bowl {
+      position: absolute;
+      width: 110px;
+      height: 90px;
+      background: url("כף.png") no-repeat center/contain;
       z-index: 110;
     }
 
-    #hangerLt {
-      top: 120px;
-      left: 90px;
-    }
-
-    #hangerRt {
-      top: 120px;
-      left: 420px;
-    }
+    #bowlLt { top: 200px; left: 105px; }
+    #bowlRt { top: 200px; left: 415px; }
 
     .weight {
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 45px;
+      height: 45px;
       background-size: contain;
       background-repeat: no-repeat;
     }
 
     .coin {
-      width: 50px;
-      height: 30px;
+      width: 40px;
+      height: 20px;
     }
 
     #originalEq, #eq {
@@ -152,8 +130,8 @@
   <div id="arm"></div>
   <div id="hangerLt" class="hanger"></div>
   <div id="hangerRt" class="hanger"></div>
-  <div id="bowlLt"></div>
-  <div id="bowlRt"></div>
+  <div id="bowlLt" class="bowl"></div>
+  <div id="bowlRt" class="bowl"></div>
 </div>
 
 <div id="eq">
@@ -163,7 +141,7 @@
 </div>
 
 <script>
-let my = { imgHome: '', bowlWts: [[0, 0], [0, 0]] };
+let my = { imgHome: '' };
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -217,13 +195,13 @@ function placeWts() {
     let html = '';
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       const img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
-      const top = my.bowlWts[b][1] > 0 ? 70 - i * 6 : 40;
-      html += `<img src="${my.imgHome + img}" style="position:absolute; left:${60 + i * 6}px; top:${top}px;" class="${my.bowlWts[b][1] > 0 ? 'coin' : 'weight'}">`;
+      const top = my.bowlWts[b][1] > 0 ? 40 - i * 5 : 30;
+      html += `<img src="${my.imgHome + img}" style="position:absolute; left:${30 + i * 8}px; top:${top}px;" class="${my.bowlWts[b][1] > 0 ? 'coin' : 'weight'}">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       const img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      const top = my.bowlWts[b][0] > 0 ? 60 - i * 8 : 40;
-      html += `<img src="${my.imgHome + img}" style="position:absolute; left:${24 + i * 6}px; top:${top}px;" class="weight">`;
+      const top = my.bowlWts[b][0] > 0 ? 30 - i * 5 : 30;
+      html += `<img src="${my.imgHome + img}" style="position:absolute; left:${20 + i * 8}px; top:${top}px;" class="weight">`;
     }
     document.getElementById(bowls[b]).innerHTML = html;
   }
