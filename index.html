@@ -114,8 +114,8 @@
     }
 
     .holder {
-      width: 18px;
-      height: 70px;
+      width: 24px;
+      height: 100px;
       background-image: url("מחזיק כף.png");
       background-size: contain;
       background-repeat: no-repeat;
@@ -226,12 +226,12 @@ function placeWts() {
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       const img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
       const left = 20 + i * 15;
-      html += `<img src="${img}" style="position:absolute; top:30%; left:${left}%; width:5%; height:auto;">`;
+      html += `<img src="${img}" style="position:absolute; top:35%; left:${left}%; width:7%; height:auto;">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       const img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
       const left = 20 + i * 15;
-      html += `<img src="${img}" style="position:absolute; top:10%; left:${left}%; width:6%; height:auto;">`;
+      html += `<img src="${img}" style="position:absolute; top:15%; left:${left}%; width:8%; height:auto;">`;
     }
     document.getElementById(bowls[b]).innerHTML = html;
   }
@@ -243,8 +243,8 @@ function tiltScale(deg) {
   document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)';
   document.getElementById('bowlLt').style.top = (baseTop - offset) + 'px';
   document.getElementById('bowlRt').style.top = (baseTop + offset) + 'px';
-  document.getElementById('holderLt').style.top = (baseTop - offset - 40) + 'px';
-  document.getElementById('holderRt').style.top = (baseTop + offset - 40) + 'px';
+  document.getElementById('holderLt').style.top = (baseTop - offset - 50) + 'px';
+  document.getElementById('holderRt').style.top = (baseTop + offset - 50) + 'px';
 }
 
 function chg(type, val) {
