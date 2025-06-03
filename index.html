@@ -105,7 +105,7 @@
     }
 
     #base {
-      bottom: 10px;
+      bottom: 20px;
       left: 295px;
       width: 140px;
       height: 40px;
@@ -223,11 +223,11 @@ function placeWts() {
     let html = '';
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
-      html += `<img src="${img}" style="position:absolute; width:36%; top:${-20 - i * 10}%; left:35%;">`;
+      html += `<img src="${img}" style="position:absolute; width:36%; top:${-10 - i * 8}%; left:35%;">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      html += `<img src="${img}" style="position:absolute; width:34%; top:${-5 - i * 10}%; left:10%;">`;
+      html += `<img src="${img}" style="position:absolute; width:30%; top:${5 - i * 8}%; left:10%;">`;
     }
     document.getElementById(bowls[b]).innerHTML = html;
   }
