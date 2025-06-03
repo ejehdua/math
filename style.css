@@ -68,7 +68,7 @@ body {
   position: absolute;
   width: 132px;
   height: 122px;
-  background-image: url("images/כף.png");
+  background-image: url("כף.png");
   transition: top 0.3s ease-in-out;
   z-index: 100;
 }
@@ -84,7 +84,7 @@ body {
 }
 
 #arm {
-  background-image: url("images/מאזניים.png");
+  background-image: url("מאזניים.png");
   position: absolute;
   left: 100px;
   top: 110px;
@@ -95,7 +95,7 @@ body {
 }
 
 #col {
-  background-image: url("images/עמוד.png");
+  background-image: url("עמוד.png");
   position: absolute;
   left: 203px;
   top: 95px;
