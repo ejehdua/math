@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>מאזני השוויון</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -35,15 +35,15 @@
 
     #originalEq {
       font: bold 20px Arial;
-      color: #888;
+      color: #444;
       margin-bottom: 10px;
       direction: ltr;
       text-align: center;
     }
 
     #eq {
-      font: bold 26px Arial;
-      margin-top: 10px;
+      font: bold 28px Arial;
+      margin-top: 20px;
       direction: ltr;
       text-align: center;
     }
@@ -54,92 +54,56 @@
     }
 
     #success {
-      font: bold 28px Arial;
+      font: bold 32px Arial;
       color: blue;
-      margin-top: 10px;
+      margin-top: 15px;
       display: none;
     }
 
     #balance-container {
       position: relative;
       width: 600px;
-      height: 360px;
+      height: 320px;
       margin: 0 auto 20px;
       background-color: hsl(240,100%,92%);
       border-radius: 12px;
     }
 
-    #tip, #arm, #col, #base, .bowl, .holder {
-      position: absolute;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-    }
-
-    #tip {
-      top: 40px;
-      left: 285px;
-      width: 30px;
-      height: 40px;
-      background-image: url("שפיץ עליון.png");
-      z-index: 200;
-    }
-
-    #arm {
-      top: 80px;
-      left: 90px;
-      width: 420px;
-      height: 80px;
-      background-image: url("מאזניים.png");
-      z-index: 150;
-      transition: transform 0.3s ease-in-out;
-    }
-
-    #col {
-      top: 120px;
-      left: 252px;
-      width: 96px;
-      height: 204px;
-      background-image: url("עמוד.png");
-      z-index: 100;
-    }
-
-    #base {
-      bottom: 0;
-      left: 230px;
-      width: 140px;
-      height: 40px;
-      background-image: url("בסיס.png");
-      z-index: 90;
-    }
-
-    .holder {
-      width: 18px;
-      height: 70px;
-      background-image: url("מחזיק כף.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      z-index: 115;
-      transition: top 0.3s ease-in-out;
-    }
-
-    #holderLt { left: 105px; top: 120px; }
-    #holderRt { left: 375px; top: 120px; }
-
     .bowl {
+      position: absolute;
       width: 132px;
       height: 122px;
       background-image: url("כף.png");
-      z-index: 110;
       transition: top 0.3s ease-in-out;
+      z-index: 100;
     }
 
     #bowlLt { left: 48px; top: 160px; }
     #bowlRt { left: 318px; top: 160px; }
+
+    #arm {
+      background-image: url("מאזניים.png");
+      position: absolute;
+      left: 100px;
+      top: 110px;
+      height: 87px;
+      width: 301px;
+      transition: transform 0.3s ease-in-out;
+      z-index: 150;
+    }
+
+    #col {
+      background-image: url("עמוד.png");
+      position: absolute;
+      left: 203px;
+      top: 95px;
+      height: 204px;
+      width: 96px;
+      z-index: 100;
+    }
   </style>
 </head>
-<body>
+<body dir="rtl">
 
 <div id="control-panel">
   <button onclick="chg(0,1)" class="btn add">+X (הוסף נעלם)</button>
@@ -150,15 +114,12 @@
 </div>
 
 <div id="success">כל הכבוד!</div>
+
 <div id="originalEq"></div>
 
 <div id="balance-container">
-  <div id="tip"></div>
   <div id="arm"></div>
   <div id="col"></div>
-  <div id="base"></div>
-  <div id="holderLt" class="holder"></div>
-  <div id="holderRt" class="holder"></div>
   <div id="bowlLt" class="bowl"></div>
   <div id="bowlRt" class="bowl"></div>
 </div>
@@ -202,6 +163,7 @@ function newEq() {
     my.bowlWts[0][typ] += amt;
     my.bowlWts[1][typ] += amt;
   }
+
   updateDisplay();
   document.getElementById("originalEq").textContent = eqFmt(my.bowlWts[0]) + " = " + eqFmt(my.bowlWts[1]);
 }
@@ -220,33 +182,25 @@ function updateDisplay() {
 }
 
 function placeWts() {
-  const bowls = ['bowlLt', 'bowlRt'];
+  let bowls = ['bowlLt', 'bowlRt'];
   for (let b = 0; b < 2; b++) {
     let html = '';
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
-      const img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
-      const top = 75 - i * 8;
-      const left = 40 + i * 7;
-      html += `<img src="${img}" style="position:absolute; top:${top}px; left:${left}px; width:28px; height:59px;">`;
+      let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
+      html += `<img src="${my.imgHome + img}" style="position:absolute; left:${64 + i * 6}px; top:${my.bowlWts[b][1] > 0 ? 82 - i * 12 : 46}px;">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
-      const img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      const top = 45 - i * 8;
-      const left = 20 + i * 7;
-      html += `<img src="${img}" style="position:absolute; top:${top}px; left:${left}px; width:43px; height:32px;">`;
+      let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
+      html += `<img src="${my.imgHome + img}" style="position:absolute; left:${24 + i * 6}px; top:${my.bowlWts[b][0] > 0 ? 77 - i * 18 : 46}px;">`;
     }
     document.getElementById(bowls[b]).innerHTML = html;
   }
 }
 
 function tiltScale(deg) {
-  const baseTop = 160;
-  const offset = 4 * deg;
   document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)';
-  document.getElementById('bowlLt').style.top = (baseTop - offset) + 'px';
-  document.getElementById('bowlRt').style.top = (baseTop + offset) + 'px';
-  document.getElementById('holderLt').style.top = (baseTop - offset - 40) + 'px';
-  document.getElementById('holderRt').style.top = (baseTop + offset - 40) + 'px';
+  document.getElementById('bowlLt').style.top = 160 + 4 * -deg + 'px';
+  document.getElementById('bowlRt').style.top = 160 + 4 * deg + 'px';
 }
 
 function chg(type, val) {
