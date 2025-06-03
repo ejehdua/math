@@ -4,7 +4,99 @@
   <meta charset="UTF-8" />
   <title>מאזני השוויון</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .btn {
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 20px;
+      margin: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .add {
+      background-color: #afbc21; /* ירוק-צהבהב */
+    }
+    .sub {
+      background-color: #e14679; /* ורוד אמית */
+    }
+    #control-panel {
+      background-color: #ffd;
+      border-radius: 10px;
+      display: inline-block;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+    }
+    #originalEq {
+      font: bold 20px Arial;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    #eq {
+      font: bold 28px Arial;
+      margin-top: 20px;
+    }
+    .equation-part {
+      display: inline-block;
+      min-width: 100px;
+    }
+    #success {
+      font: bold 32px Arial;
+      color: blue;
+      margin-top: 15px;
+      display: none;
+    }
+    #balance-container {
+      position: relative;
+      width: 600px;
+      height: 320px;
+      margin: 0 auto 20px;
+      background-color: hsl(240,100%,92%);
+      border-radius: 12px;
+    }
+    .bowl {
+      position: absolute;
+      width: 132px;
+      height: 122px;
+      background-image: url("כף.png");
+      transition: top 0.3s ease-in-out;
+      z-index: 100;
+    }
+    #bowlLt {
+      left: 48px;
+      top: 160px;
+    }
+    #bowlRt {
+      left: 318px;
+      top: 160px;
+    }
+    #arm {
+      background-image: url("מאזניים.png");
+      position: absolute;
+      left: 100px;
+      top: 110px;
+      height: 87px;
+      width: 301px;
+      transition: transform 0.3s ease-in-out;
+      z-index: 150;
+    }
+    #col {
+      background-image: url("עמוד.png");
+      position: absolute;
+      left: 203px;
+      top: 95px;
+      height: 204px;
+      width: 96px;
+      z-index: 100;
+    }
+  </style>
 </head>
 <body dir="rtl">
 
