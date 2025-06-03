@@ -261,8 +261,8 @@ function tiltScale(deg) {
   document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)';
   document.getElementById('bowlLt').style.top = 320 + 4 * -deg + 'px';
   document.getElementById('bowlRt').style.top = 320 + 4 * deg + 'px';
-  document.getElementById('holderLt').style.top = 85 + 2 * -deg + 'px';
-  document.getElementById('holderRt').style.top = 85 + 2 * deg + 'px';
+  document.getElementById('holderLt').style.top = -85 + 2 * -deg + 'px';
+  document.getElementById('holderRt').style.top = -85 + 2 * deg + 'px';
 }
 
 function chg(type, val) {
