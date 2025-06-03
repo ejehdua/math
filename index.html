@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>מאזני השוויון</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .btn {
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 20px;
+      margin: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .add { background-color: #afbc21; }
+    .sub { background-color: #e14679; }
+    .new { background-color: #1daddb; font-weight: bold; }
+
+    #control-panel {
+      background-color: #ffd;
+      border-radius: 10px;
+      display: inline-block;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+    }
+
+    #originalEq {
+      font: bold 20px Arial;
+      color: #888;
+      margin-bottom: 10px;
+      direction: ltr;
+      text-align: center;
+    }
+
+    #eq {
+      font: bold 26px Arial;
+      margin-top: 10px;
+      direction: ltr;
+      text-align: center;
+    }
+
+    .equation-part {
+      display: inline-block;
+      min-width: 100px;
+    }
+
+    #success {
+      font: bold 28px Arial;
+      color: blue;
+      margin-top: 10px;
+      display: none;
+    }
+
+    #balance-container {
+      position: relative;
+      width: 720px;
+      height: 460px;
+      margin: 0 auto 20px;
+      background-color: hsl(240,100%,92%);
+      border-radius: 12px;
+    }
+
+    #tip, #arm, #col, #base, .bowl, .holder {
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
+
+    #tip {
+      top: 75px;
+      left: 345px;
+      width: 30px;
+      height: 40px;
+      background-image: url("שפיץ עליון.png");
+      z-index: 200;
+    }
+
+    #arm {
+      top: 85px;
+      left: 100px;
+      width: 520px;
+      height: 120px;
+      background-image: url("מאזניים.png");
+      z-index: 150;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #col {
+      top: 110px;
+      left: 310px;
+      width: 100px;
+      height: 280px;
+      background-image: url("עמוד.png");
+      z-index: 100;
+    }
+
+    #base {
+      bottom: 38px;
+      left: 295px;
+      width: 140px;
+      height: 40px;
+      background-image: url("בסיס.png");
+      z-index: 90;
+    }
+
+    .holder {
+      width: 130px;
+      height: 520px;
+      background-image: url("מחזיק כף.png");
+      z-index: 115;
+      transition: top 0.3s ease-in-out;
+    }
+
+    #holderLt { left: 180px; top: 60px; }
+    #holderRt { left: 460px; top: 60px; }
+
+    .bowl {
+      width: 132px;
+      height: 122px;
+      background-image: url("כף.png");
+      z-index: 110;
+      transition: top 0.3s ease-in-out;
+    }
+
+    #bowlLt { left: 153px; top: 295px; }
+    #bowlRt { left: 433px; top: 295px; }
+  </style>
+</head>
+<body>
+
+<div id="control-panel">
+  <button onclick="chg(0,1)" class="btn add">+X (הוסף נעלם)</button>
+  <button onclick="chg(1,1)" class="btn add">+1 (הוסף מספר)</button>
+  <button onclick="chg(0,-1)" class="btn sub">−X (הסר נעלם)</button>
+  <button onclick="chg(1,-1)" class="btn sub">−1 (הסר מספר)</button>
+  <button onclick="newEq()" class="btn new">משוואה חדשה</button>
+</div>
+
+<div id="success">כל הכבוד!</div>
+<div id="originalEq"></div>
+
+<div id="balance-container">
+  <div id="tip"></div>
+  <div id="arm"></div>
+  <div id="col"></div>
+  <div id="holderLt" class="holder"></div>
+  <div id="holderRt" class="holder"></div>
+  <div id="bowlLt" class="bowl"></div>
+  <div id="bowlRt" class="bowl"></div>
+  <div id="base"></div>
+</div>
+
+<div id="eq">
+  <span id="eqLt" class="equation-part" style="margin-left: 50px;"></span>
+  <span>=</span>
+  <span id="eqRt" class="equation-part" style="margin-right: 50px;"></span>
+</div>
+
+<script>
+let my = { imgHome: '', };
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function eqFmt(a) {
+  let [x, n] = a;
+  let s = '';
+  if (x !== 0) {
+    if (x === -1) s += '−x';
+    else if (x === 1) s += 'x';
+    else s += x + 'x';
+  }
+  if (n !== 0) {
+    if (n > 0 && s) s += ' + ' + n;
+    else if (n > 0) s += n;
+    else s += '−' + Math.abs(n);
+  }
+  return s || '0';
+}
+
+function newEq() {
+  const xVal = getRandomInt(2, 6);
+  my.bowlWts = [[1, 0], [0, xVal]];
+  for (let i = 0; i < 2; i++) {
+    const typ = i;
+    let amt = getRandomInt(1, 4);
+    if (getRandomInt(0, 1)) amt = -amt;
+    my.bowlWts[0][typ] += amt;
+    my.bowlWts[1][typ] += amt;
+  }
+
+  updateDisplay();
+  document.getElementById("originalEq").textContent = eqFmt(my.bowlWts[0]) + " = " + eqFmt(my.bowlWts[1]);
+}
+
+function updateDisplay() {
+  document.getElementById("eqLt").textContent = eqFmt(my.bowlWts[0]);
+  document.getElementById("eqRt").textContent = eqFmt(my.bowlWts[1]);
+
+  const ok = (my.bowlWts[0][0] === 1 && my.bowlWts[0][1] === 0);
+  document.getElementById("success").style.display = ok ? 'block' : 'none';
+
+  placeWts();
+  tiltScale(2);
+  setTimeout(() => tiltScale(-2), 300);
+  setTimeout(() => tiltScale(0), 600);
+}
+
+function placeWts() {
+  let bowls = ['bowlLt', 'bowlRt'];
+  for (let b = 0; b < 2; b++) {
+    let html = '';
+    for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
+      let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
+      let top = 12 - i * 8;
+      html += `<img src="${img}" style="position:absolute; width:16%; top:${top}%; left:35%;">`;
+    }
+    for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
+      let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
+      let top = 12 - i * 8;
+      html += `<img src="${img}" style="position:absolute; width:16%; top:${top}%; left:35%;">`;
+    }
+    document.getElementById(bowls[b]).innerHTML = html;
+  }
+}
+
+function tiltScale(deg) {
+  document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)';
+  document.getElementById('bowlLt').style.top = 295 + 4 * -deg + 'px';
+  document.getElementById('bowlRt').style.top = 295 + 4 * deg + 'px';
+  document.getElementById('holderLt').style.top = 60 + 2 * -deg + 'px';
+  document.getElementById('holderRt').style.top = 60 + 2 * deg + 'px';
+}
+
+function chg(type, val) {
+  my.bowlWts[0][type] += val;
+  my.bowlWts[1][type] += val;
+  updateDisplay();
+}
+
+window.onload = newEq;
+</script>
+</body>
+</html>
