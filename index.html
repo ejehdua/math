@@ -9,16 +9,16 @@
 <body dir="rtl">
 
 <div id="control-panel">
-  <button onclick="chg(0,1)" class="btn btn-add">+X (הוסף נעלם)</button>
-  <button onclick="chg(1,1)" class="btn btn-add">+1 (הוסף מספר)</button>
-  <button onclick="chg(0,-1)" class="btn btn-sub">−X (הסר נעלם)</button>
-  <button onclick="chg(1,-1)" class="btn btn-sub">−1 (הסר מספר)</button>
-  <button onclick="newEq()" class="btn btn-new">משוואה חדשה</button>
+  <button onclick="chg(0,1)" class="btn add">+X (הוסף נעלם)</button>
+  <button onclick="chg(1,1)" class="btn add">+1 (הוסף מספר)</button>
+  <button onclick="chg(0,-1)" class="btn sub">−X (הסר נעלם)</button>
+  <button onclick="chg(1,-1)" class="btn sub">−1 (הסר מספר)</button>
+  <button onclick="newEq()" class="btn" style="background-color:#1daddb; color:white; font-weight:bold;">משוואה חדשה</button>
 </div>
 
 <div id="success">כל הכבוד!</div>
 
-<div id="originalEq" class="original-eq"></div>
+<div id="originalEq" style="direction: ltr; text-align: left; font: 14px Arial; color: #444; margin: 4px 0 10px 0; text-align: center;"></div>
 
 <div id="balance-container">
   <div id="arm"></div>
@@ -34,7 +34,7 @@
 </div>
 
 <script>
-let my = { imgHome: 'https://www.mathsisfun.com/algebra/images/' };
+let my = { imgHome: 'images/' };
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -89,11 +89,11 @@ function placeWts() {
   for (let b = 0; b < 2; b++) {
     let html = '';
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
-      let img = my.bowlWts[b][1] > 0 ? 'balance-wt1.gif' : 'balance-up1.gif';
+      let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
       html += `<img src="${my.imgHome + img}" style="position:absolute; left:${64 + i * 6}px; top:${my.bowlWts[b][1] > 0 ? 82 - i * 12 : 46}px;">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
-      let img = my.bowlWts[b][0] > 0 ? 'balance-wtx.gif' : 'balance-upx.gif';
+      let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
       html += `<img src="${my.imgHome + img}" style="position:absolute; left:${24 + i * 6}px; top:${my.bowlWts[b][0] > 0 ? 77 - i * 18 : 46}px;">`;
     }
     document.getElementById(bowls[b]).innerHTML = html;
@@ -114,5 +114,6 @@ function chg(type, val) {
 
 window.onload = newEq;
 </script>
+
 </body>
 </html>
