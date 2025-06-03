@@ -62,8 +62,8 @@
 
     #balance-container {
       position: relative;
-      width: 700px;
-      height: 440px;
+      width: 720px;
+      height: 460px;
       margin: 0 auto 20px;
       background-color: hsl(240,100%,92%);
       border-radius: 12px;
@@ -77,8 +77,8 @@
     }
 
     #tip {
-      top: 40px;
-      left: 335px;
+      top: 35px;
+      left: 345px;
       width: 30px;
       height: 40px;
       background-image: url("שפיץ עליון.png");
@@ -87,9 +87,9 @@
 
     #arm {
       top: 75px;
-      left: 140px;
-      width: 480px;
-      height: 100px;
+      left: 120px;
+      width: 520px;
+      height: 120px;
       background-image: url("מאזניים.png");
       z-index: 150;
       transition: transform 0.3s ease-in-out;
@@ -97,7 +97,7 @@
 
     #col {
       top: 115px;
-      left: 250px;
+      left: 270px;
       width: 100px;
       height: 220px;
       background-image: url("עמוד.png");
@@ -106,7 +106,7 @@
 
     #base {
       bottom: 0;
-      left: 230px;
+      left: 250px;
       width: 140px;
       height: 40px;
       background-image: url("בסיס.png");
@@ -114,15 +114,15 @@
     }
 
     .holder {
-      width: 72px;
-      height: 270px;
+      width: 80px;
+      height: 290px;
       background-image: url("מחזיק כף.png");
       z-index: 115;
       transition: top 0.3s ease-in-out;
     }
 
-    #holderLt { left: 210px; top: 100px; }
-    #holderRt { left: 490px; top: 100px; }
+    #holderLt { left: 210px; top: 108px; }
+    #holderRt { left: 490px; top: 108px; }
 
     .bowl {
       width: 132px;
@@ -132,8 +132,8 @@
       transition: top 0.3s ease-in-out;
     }
 
-    #bowlLt { left: 153px; top: 240px; }
-    #bowlRt { left: 433px; top: 240px; }
+    #bowlLt { left: 153px; top: 260px; }
+    #bowlRt { left: 433px; top: 260px; }
   </style>
 </head>
 <body>
@@ -223,11 +223,11 @@ function placeWts() {
     let html = '';
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
-      html += `<img src="${img}" style="position:absolute; width:34%; top:${40 - i * 14}%; left:38%;">`;
+      html += `<img src="${img}" style="position:absolute; width:38%; top:${10 - i * 10}%; left:38%;">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      html += `<img src="${img}" style="position:absolute; width:38%; top:${40 - i * 12}%; left:10%;">`;
+      html += `<img src="${img}" style="position:absolute; width:40%; top:${25 - i * 10}%; left:12%;">`;
     }
     document.getElementById(bowls[b]).innerHTML = html;
   }
@@ -235,10 +235,10 @@ function placeWts() {
 
 function tiltScale(deg) {
   document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)';
-  document.getElementById('bowlLt').style.top = 240 + 4 * -deg + 'px';
-  document.getElementById('bowlRt').style.top = 240 + 4 * deg + 'px';
-  document.getElementById('holderLt').style.top = 100 + 2 * -deg + 'px';
-  document.getElementById('holderRt').style.top = 100 + 2 * deg + 'px';
+  document.getElementById('bowlLt').style.top = 260 + 4 * -deg + 'px';
+  document.getElementById('bowlRt').style.top = 260 + 4 * deg + 'px';
+  document.getElementById('holderLt').style.top = 108 + 2 * -deg + 'px';
+  document.getElementById('holderRt').style.top = 108 + 2 * deg + 'px';
 }
 
 function chg(type, val) {
