@@ -121,9 +121,9 @@
       transition: top 0.3s ease-in-out;
     }
 
-    /* המחזיקים טיפה למעלה ושמאלה */
-    #holderLt { left: 150px; top: -95px; }
-    #holderRt { left: 430px; top: -95px; }
+    /* מחזיקים טיפטיפה ימינה ולמטה */
+    #holderLt { left: 155px; top: -90px; }
+    #holderRt { left: 435px; top: -90px; }
 
     .bowl {
       width: 132px;
@@ -231,10 +231,10 @@ function placeWts() {
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:35%;">`;
     }
 
-    // נעלמים (קוביה או בלון -X)
+    // נעלמים (קוביה או בלון -X) – בגובה של בלוני 1
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -35 - i * 8; // טיפה ממש למטה
+      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -30 - i * 8;
       let width = my.bowlWts[b][0] > 0 ? '28%' : '26%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:10%;">`;
     }
@@ -247,8 +247,8 @@ function tiltScale(deg) {
   document.getElementById('arm').style.transform = 'rotate(' + 1.625 * deg + 'deg)';
   document.getElementById('bowlLt').style.top = 320 + 4 * -deg + 'px';
   document.getElementById('bowlRt').style.top = 320 + 4 * deg + 'px';
-  document.getElementById('holderLt').style.top = -95 + 2 * -deg + 'px';
-  document.getElementById('holderRt').style.top = -95 + 2 * deg + 'px';
+  document.getElementById('holderLt').style.top = -90 + 2 * -deg + 'px';
+  document.getElementById('holderRt').style.top = -90 + 2 * deg + 'px';
 }
 
 function chg(type, val) {
