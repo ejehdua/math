@@ -227,15 +227,15 @@ function placeWts() {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
       let top = my.bowlWts[b][1] > 0 ? 14 - i * 8 : -30 - i * 8;
       let width = my.bowlWts[b][1] > 0 ? '34%' : '26%';
-      html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:30%;">`;
+      html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:35%;">`;
     }
 
     // נעלמים (קוביה או בלון -X) – טיפטיפה למטה
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -36 - i * 8; // טיפטיפה למטה
+      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -40 - i * 8; // טיפטיפה למטה
       let width = my.bowlWts[b][0] > 0 ? '28%' : '28%';
-      html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:15%;">`;
+      html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:10%;">`;
     }
 
     document.getElementById(bowls[b]).innerHTML = html;
