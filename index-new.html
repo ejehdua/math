@@ -200,12 +200,12 @@ function placeWts() {
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
       let top = 12 - i * 8;
-      let width = my.bowlWts[b][1] > 0 ? '34%' : '34%';
+      let width = '38%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:35%;">`;
     }
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      let width = my.bowlWts[b][0] > 0 ? '28%' : '28%';
+      let width = '38%';
       let top = 12 - i * 8;
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:10%;">`;
     }
