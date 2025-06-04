@@ -233,8 +233,8 @@ function placeWts() {
     // נעלמים (קוביה או בלון -X) – טיפטיפה למטה
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -30 - i * 8; // טיפטיפה למטה
-      let width = my.bowlWts[b][0] > 0 ? '34%' : '26%';
+      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -34 - i * 8; // טיפטיפה למטה
+      let width = my.bowlWts[b][0] > 0 ? '28%' : '28%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:10%;">`;
     }
 
