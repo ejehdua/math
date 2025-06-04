@@ -121,8 +121,9 @@
       transition: top 0.3s ease-in-out;
     }
 
-    #holderLt { left: 180px; top: -85px; }
-    #holderRt { left: 460px; top: -85px; }
+    /* המחזיקים מוזזים שמאלה */
+    #holderLt { left: 120px; top: -85px; }
+    #holderRt { left: 400px; top: -85px; }
 
     .bowl {
       width: 132px;
@@ -134,27 +135,6 @@
 
     #bowlLt { left: 153px; top: 320px; }
     #bowlRt { left: 433px; top: 320px; }
-
-    .item {
-      position: absolute;
-      width: 18%;
-    }
-
-    .coin {
-      top: 7%;
-      left: 35%;
-    }
-
-    .cube {
-      top: 14%;
-      left: 10%;
-    }
-
-    .balloon {
-      width: 10%;
-      top: -12%;
-      left: 40%;
-    }
   </style>
 </head>
 <body>
@@ -242,17 +222,23 @@ function placeWts() {
   let bowls = ['bowlLt', 'bowlRt'];
   for (let b = 0; b < 2; b++) {
     let html = '';
+
+    // מספרים רגילים
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
-      let top = my.bowlWts[b][1] > 0 ? 14 - i * 8 : 0;
-      let width = my.bowlWts[b][1] > 0 ? '34%' : '26%';
+      let top = 0;
+      let width = '26%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:35%;">`;
     }
+
+    // משתנים (X)
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      let width = my.bowlWts[b][0] > 0 ? '28%' : '18%';
-      html += `<img src="${img}" style="position:absolute; width:${width}; top:${12 - i * 8}%; left:10%;">`;
+      let width = '26%'; // אחיד לבלון X כמו 1
+      let top = 0; // גובה אחיד
+      html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:10%;">`;
     }
+
     document.getElementById(bowls[b]).innerHTML = html;
   }
 }
