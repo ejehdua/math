@@ -122,9 +122,9 @@
       transition: top 0.3s ease-in-out;
     }
 
-    /* המחזיקים ימינה */
-    #holderLt { left: 180px; top: -85px; }
-    #holderRt { left: 460px; top: -85px; }
+    /* המחזיקים קצת שמאלה */
+    #holderLt { left: 160px; top: -85px; }
+    #holderRt { left: 440px; top: -85px; }
 
     .bowl {
       width: 132px;
@@ -227,7 +227,7 @@ function placeWts() {
     // מספרים רגילים (מטבע או בלון -1)
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
-      let top = my.bowlWts[b][1] > 0 ? 14 - i * 8 : -40 - i * 8;
+      let top = my.bowlWts[b][1] > 0 ? 14 - i * 8 : -30 - i * 8; // בלונים קצת יותר נמוך
       let width = my.bowlWts[b][1] > 0 ? '34%' : '26%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:35%;">`;
     }
@@ -235,7 +235,7 @@ function placeWts() {
     // נעלמים (קוביה או בלון -X)
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -40 - i * 8;
+      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -30 - i * 8; // גם הבלונים של X יותר נמוך
       let width = my.bowlWts[b][0] > 0 ? '28%' : '26%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:10%;">`;
     }
