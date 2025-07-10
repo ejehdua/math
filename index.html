@@ -117,12 +117,13 @@
       width: 125px;
       height: 700px;
       background-image: url("מחזיק כף.png");
-      z-index: 80; /* ברקע של שאר הפריטים */
+      z-index: 80;
       transition: top 0.3s ease-in-out;
     }
 
-    #holderLt { left: 155px; top: -90px; }
-    #holderRt { left: 435px; top: -90px; }
+    /* מיקום חדש, קרוב יותר לקצוות */
+    #holderLt { left: 127px; top: -90px; }
+    #holderRt { left: 465px; top: -90px; }
 
     .bowl {
       width: 132px;
@@ -132,8 +133,10 @@
       transition: top 0.3s ease-in-out;
     }
 
-    #bowlLt { left: 153px; top: 320px; }
-    #bowlRt { left: 433px; top: 320px; }
+    /* מיקום חדש, קרוב יותר לקצוות */
+    #bowlLt { left: 125px; top: 320px; }
+    #bowlRt { left: 463px; top: 320px; }
+
   </style>
 </head>
 <body>
@@ -221,23 +224,18 @@ function placeWts() {
   let bowls = ['bowlLt', 'bowlRt'];
   for (let b = 0; b < 2; b++) {
     let html = '';
-
-    // מספרים רגילים (מטבע או בלון -1)
     for (let i = 0; i < Math.abs(my.bowlWts[b][1]); i++) {
       let img = my.bowlWts[b][1] > 0 ? 'מטבע.png' : 'בלון מינוס 1.png';
       let top = my.bowlWts[b][1] > 0 ? 14 - i * 8 : -30 - i * 8;
       let width = my.bowlWts[b][1] > 0 ? '34%' : '26%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:35%;">`;
     }
-
-    // נעלמים (קוביה או בלון -X) – טיפטיפה למטה
     for (let i = 0; i < Math.abs(my.bowlWts[b][0]); i++) {
       let img = my.bowlWts[b][0] > 0 ? 'קובית X.png' : 'בלון מינוס X.png';
-      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -28 - i * 8; // טיפטיפה למטה
+      let top = my.bowlWts[b][0] > 0 ? 12 - i * 8 : -28 - i * 8;
       let width = my.bowlWts[b][0] > 0 ? '28%' : '28%';
       html += `<img src="${img}" style="position:absolute; width:${width}; top:${top}%; left:10%;">`;
     }
-
     document.getElementById(bowls[b]).innerHTML = html;
   }
 }
